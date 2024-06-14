@@ -11,7 +11,7 @@ class BinarySearchTree:
         self.__root = None
 
 
-    def insert(self, key): # Big-O: O(n) / Big-Theta: O(log n)
+    def insert(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
         if self.__root is None:
             self.__root = Node(key)
         else:
@@ -31,7 +31,7 @@ class BinarySearchTree:
 
 
 
-    def delete(self, key): # Big-O: O(n) / Big-Theta: O(log n)
+    def delete(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
         self.__root = self.__delete(self.__root, key)
 
     def __delete(self, node, key):
@@ -83,36 +83,36 @@ class BinarySearchTree:
         return self.__inorder(self.__root)
 
     def __inorder(self, node):
-        response = []
+        keys = []
         if node is not None:
-            response = self.__inorder(node.left)
-            response.append(node.key)
-            response = response + self.__inorder(node.right)
-        return response
+            keys = self.__inorder(node.left)
+            keys.append(node.key)
+            keys = keys + self.__inorder(node.right)
+        return keys
 
 
     def preorder(self):
         return self.__preorder(self.__root)
 
     def __preorder(self, node):
-        response = []
+        keys = []
         if node is not None:
-            response.append(node.key)
-            response = response + self.__preorder(node.left)
-            response = response + self.__preorder(node.right)
-        return response
+            keys.append(node.key)
+            keys = keys + self.__preorder(node.left)
+            keys = keys + self.__preorder(node.right)
+        return keys
 
 
     def postorder(self):
         return self.__postorder(self.__root)
 
     def __postorder(self, node):
-        response = []
+        keys = []
         if node is not None:
-            response = self.__postorder(node.left)
-            response = response + self.__postorder(node.right)
-            response.append(node.key)
-        return response
+            keys = self.__postorder(node.left)
+            keys = keys + self.__postorder(node.right)
+            keys.append(node.key)
+        return keys
 
 
 

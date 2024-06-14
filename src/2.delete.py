@@ -11,7 +11,7 @@ class BinarySearchTree:
         self.__root = None
 
 
-    def insert(self, key): # Big-O: O(n) / Big-Theta: O(log n)
+    def insert(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
         if self.__root is None:
             self.__root = Node(key)
         else:
@@ -30,7 +30,7 @@ class BinarySearchTree:
                 self.__insert(node.right, key)
 
 
-    def search(self, key): # Big-O: O(n) / Big-Theta: O(log n)
+    def search(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
         return self.__search(self.__root, key)
 
     def __search(self, node, key):
@@ -46,7 +46,7 @@ class BinarySearchTree:
         return self.__search(node.left, key)
 
 
-    def delete(self, key): # Big-O: O(n) / Big-Theta: O(log n)
+    def delete(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
         self.__root = self.__delete(self.__root, key)
 
     def __delete(self, node, key):
