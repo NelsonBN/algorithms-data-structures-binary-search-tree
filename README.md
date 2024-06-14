@@ -8,5 +8,9 @@
 - [Traversal](./src/3.traversal.py)
 
 
+## Demonstration
+- [Algorithm Visualizer](https://www.cs.usfca.edu/~galles/visualization/BST.html)
+
+
 ## References
 - [Other algoritmos & Data Structures](https://github.com/NelsonBN/algorithms-data-structures)
