@@ -30,7 +30,7 @@ class BinarySearchTree:
                 self.__insert(node.right, key)
 
 
-    def balance(self):
+    def balance(self): # O(n)
         nodes = []
         self.__inorder(nodes, self.__root)
         n = len(nodes)

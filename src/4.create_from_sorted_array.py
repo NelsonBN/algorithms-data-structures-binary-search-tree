@@ -11,7 +11,7 @@ class BinarySearchTree:
         self.__root = self.__balance(arr, 0, len(arr) - 1)
 
 
-    def __balance(self, nodes, start, end):
+    def __balance(self, nodes, start, end): # O(n)
         if start > end:
             return None
         mid = start + (end - start) // 2
