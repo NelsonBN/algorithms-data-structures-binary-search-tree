@@ -63,12 +63,12 @@ class BinarySearchTree:
             elif node.right is None:
                 return node.left
 
-            node.key = self.__minKey(node.right)
+            node.key = self.__minOfRightSubTree(node.right)
             node.right = self.__delete(node.right, node.key)
 
         return node
 
-    def __minKey(self, node):
+    def __minOfRightSubTree(self, node):
         current = node
         while current.left is not None:
             current = current.left

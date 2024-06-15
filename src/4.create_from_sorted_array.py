@@ -7,7 +7,6 @@ class Node:
 
 class BinarySearchTree:
     def __init__(self, arr):
-        arr.sort()
         self.__root = self.__balance(arr, 0, len(arr) - 1)
 
 
@@ -39,7 +38,7 @@ class BinarySearchTree:
             self.__print_tree(node.right, indent, True)
 
 
-values = [10, 5, 15, 2, 7, 12, 20]
+values = [ -120, 10, 25, 35, 50, 51, 100, 234, 1200, 1300, 1400, 3000]
 
 bst = BinarySearchTree(values)
 bst.print_tree()

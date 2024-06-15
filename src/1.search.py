@@ -47,6 +47,25 @@ class BinarySearchTree:
 
 
 
+    def print_tree(self):
+        self.__print_tree(self.__root, "", True)
+
+    def __print_tree(self, node, indent, last):
+        if node is not None:
+            print(indent, end='')
+            if last:
+                print("R----", end='')
+                indent += "     "
+            else:
+                print("L----", end='')
+                indent += "|    "
+
+            print(node.key)
+            self.__print_tree(node.left, indent, False)
+            self.__print_tree(node.right, indent, True)
+
+
+
 bst = BinarySearchTree()
 bst.insert(50)
 bst.insert(90)
@@ -57,6 +76,9 @@ bst.insert(70)
 bst.insert(10)
 bst.insert(60)
 bst.insert(80)
+
+
+bst.print_tree()
 
 search = 20
 print(f"Search {search}: {bst.search(search) is not None}")
