@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self, key):
-        self.key = key
+    def __init__(self, value):
+        self.value = value
         self.left = None
         self.right = None
 
@@ -11,60 +11,46 @@ class BinarySearchTree:
         self.__root = None
 
 
-    def insert(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
-        if self.__root is None:
-            self.__root = Node(key)
-        else:
-            self.__insert(self.__root, key)
 
-    def __insert(self, node, key):
-        if key < node.key:
+    def insert(self, value): # Big-O: O(n) / Big-Theta: Θ(log n)
+        if self.__root is None:
+            self.__root = Node(value)
+        else:
+            self.__insert(self.__root, value)
+
+    def __insert(self, node, value):
+        if value < node.value:
             if node.left is None:
-                node.left = Node(key)
+                node.left = Node(value)
             else:
-                self.__insert(node.left, key)
+                self.__insert(node.left, value)
         else:
             if node.right is None:
-                node.right = Node(key)
+                node.right = Node(value)
             else:
-                self.__insert(node.right, key)
+                self.__insert(node.right, value)
 
 
-    def search(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
-        return self.__search(self.__root, key)
 
-    def __search(self, node, key):
+    def delete(self, target): # Big-O: O(n) / Big-Theta: Θ(log n)
+        self.__root = self.__delete(self.__root, target)
+
+    def __delete(self, node, target):
         if node is None:
             return None
 
-        if node.key == key:
-            return node
-
-        if node.key < key:
-            return self.__search(node.right, key)
-
-        return self.__search(node.left, key)
-
-
-    def delete(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
-        self.__root = self.__delete(self.__root, key)
-
-    def __delete(self, node, key):
-        if node is None:
-            return None
-
-        if key < node.key:
-            node.left = self.__delete(node.left, key)
-        elif key > node.key:
-            node.right = self.__delete(node.right, key)
+        if target < node.value:
+            node.left = self.__delete(node.left, target)
+        elif target > node.value:
+            node.right = self.__delete(node.right, target)
         else:
             if node.left is None:
                 return node.right
             elif node.right is None:
                 return node.left
 
-            node.key = self.__minOfRightSubTree(node.right)
-            node.right = self.__delete(node.right, node.key)
+            node.value = self.__minOfRightSubTree(node.right)
+            node.right = self.__delete(node.right, node.value)
 
         return node
 
@@ -72,7 +58,7 @@ class BinarySearchTree:
         current = node
         while current.left is not None:
             current = current.left
-        return current.key
+        return current.value
 
 
 
@@ -83,13 +69,13 @@ class BinarySearchTree:
         if node is not None:
             print(indent, end='')
             if last:
-                print("R----", end='')
+                print("R -> ", end='')
                 indent += "     "
             else:
-                print("L----", end='')
+                print("L -> ", end='')
                 indent += "|    "
 
-            print(node.key)
+            print(node.value)
             self.__print_tree(node.left, indent, False)
             self.__print_tree(node.right, indent, True)
 

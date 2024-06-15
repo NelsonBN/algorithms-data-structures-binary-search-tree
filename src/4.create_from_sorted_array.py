@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self, key):
-        self.key = key
+    def __init__(self, value):
+        self.value = value
         self.left = None
         self.right = None
 
@@ -27,18 +27,19 @@ class BinarySearchTree:
         if node is not None:
             print(indent, end='')
             if last:
-                print("R----", end='')
+                print("R -> ", end='')
                 indent += "     "
             else:
-                print("L----", end='')
+                print("L -> ", end='')
                 indent += "|    "
 
-            print(node.key)
+            print(node.value)
             self.__print_tree(node.left, indent, False)
             self.__print_tree(node.right, indent, True)
 
 
 values = [ -120, 10, 25, 35, 50, 51, 100, 234, 1200, 1300, 1400, 3000]
+print(f'Original arr: {values}')
 
 bst = BinarySearchTree(values)
 bst.print_tree()

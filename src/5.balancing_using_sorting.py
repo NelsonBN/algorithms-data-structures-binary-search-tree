@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self, key):
-        self.key = key
+    def __init__(self, value):
+        self.value = value
         self.left = None
         self.right = None
 
@@ -11,23 +11,25 @@ class BinarySearchTree:
         self.__root = None
 
 
-    def insert(self, key):
-        if self.__root is None:
-            self.__root = Node(key)
-        else:
-            self.__insert(self.__root, key)
 
-    def __insert(self, node, key):
-        if key < node.key:
+    def insert(self, value): # Big-O: O(n) / Big-Theta: Θ(log n)
+        if self.__root is None:
+            self.__root = Node(value)
+        else:
+            self.__insert(self.__root, value)
+
+    def __insert(self, node, value):
+        if value < node.value:
             if node.left is None:
-                node.left = Node(key)
+                node.left = Node(value)
             else:
-                self.__insert(node.left, key)
+                self.__insert(node.left, value)
         else:
             if node.right is None:
-                node.right = Node(key)
+                node.right = Node(value)
             else:
-                self.__insert(node.right, key)
+                self.__insert(node.right, value)
+
 
 
     def balance(self): # O(n)
@@ -62,13 +64,13 @@ class BinarySearchTree:
         if node is not None:
             print(indent, end='')
             if last:
-                print("R----", end='')
+                print("R -> ", end='')
                 indent += "     "
             else:
-                print("L----", end='')
+                print("L -> ", end='')
                 indent += "|    "
 
-            print(node.key)
+            print(node.value)
             self.__print_tree(node.left, indent, False)
             self.__print_tree(node.right, indent, True)
 

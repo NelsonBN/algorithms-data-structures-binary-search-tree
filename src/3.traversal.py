@@ -1,6 +1,6 @@
 class Node:
-    def __init__(self, key):
-        self.key = key
+    def __init__(self, value):
+        self.value = value
         self.left = None
         self.right = None
 
@@ -11,53 +11,53 @@ class BinarySearchTree:
         self.__root = None
 
 
-    def insert(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
+    def insert(self, value): # Big-O: O(n) / Big-Theta: Θ(log n)
         if self.__root is None:
-            self.__root = Node(key)
+            self.__root = Node(value)
         else:
-            self.__insert(self.__root, key)
+            self.__insert(self.__root, value)
 
-    def __insert(self, node, key):
-        if key < node.key:
+    def __insert(self, node, value):
+        if value < node.value:
             if node.left is None:
-                node.left = Node(key)
+                node.left = Node(value)
             else:
-                self.__insert(node.left, key)
+                self.__insert(node.left, value)
         else:
             if node.right is None:
-                node.right = Node(key)
+                node.right = Node(value)
             else:
-                self.__insert(node.right, key)
+                self.__insert(node.right, value)
 
 
 
-    def delete(self, key): # Big-O: O(n) / Big-Theta: Θ(log n)
-        self.__root = self.__delete(self.__root, key)
+    def delete(self, target): # Big-O: O(n) / Big-Theta: Θ(log n)
+        self.__root = self.__delete(self.__root, target)
 
-    def __delete(self, node, key):
+    def __delete(self, node, target):
         if node is None:
-            return node
+            return None
 
-        if key < node.key:
-            node.left = self.__delete(node.left, key)
-        elif key > node.key:
-            node.right = self.__delete(node.right, key)
+        if target < node.value:
+            node.left = self.__delete(node.left, target)
+        elif target > node.value:
+            node.right = self.__delete(node.right, target)
         else:
             if node.left is None:
                 return node.right
             elif node.right is None:
                 return node.left
 
-            node.key = self.__minKey(node.right)
-            node.right = self.__delete(node.right, node.key)
+            node.value = self.__minOfRightSubTree(node.right)
+            node.right = self.__delete(node.right, node.value)
 
         return node
 
-    def __minKey(self, node):
+    def __minOfRightSubTree(self, node):
         current = node
         while current.left is not None:
             current = current.left
-        return current.key
+        return current.value
 
 
 
@@ -68,13 +68,13 @@ class BinarySearchTree:
         if node is not None:
             print(indent, end='')
             if last:
-                print("R----", end='')
+                print("R -> ", end='')
                 indent += "     "
             else:
-                print("L----", end='')
+                print("L -> ", end='')
                 indent += "|    "
 
-            print(node.key)
+            print(node.value)
             self.__print_tree(node.left, indent, False)
             self.__print_tree(node.right, indent, True)
 
@@ -83,36 +83,36 @@ class BinarySearchTree:
         return self.__inorder(self.__root)
 
     def __inorder(self, node):
-        keys = []
+        values = []
         if node is not None:
-            keys = self.__inorder(node.left)
-            keys.append(node.key)
-            keys = keys + self.__inorder(node.right)
-        return keys
+            values = self.__inorder(node.left)
+            values.append(node.value)
+            values = values + self.__inorder(node.right)
+        return values
 
 
     def preorder(self):
         return self.__preorder(self.__root)
 
     def __preorder(self, node):
-        keys = []
+        values = []
         if node is not None:
-            keys.append(node.key)
-            keys = keys + self.__preorder(node.left)
-            keys = keys + self.__preorder(node.right)
-        return keys
+            values.append(node.value)
+            values = values + self.__preorder(node.left)
+            values = values + self.__preorder(node.right)
+        return values
 
 
     def postorder(self):
         return self.__postorder(self.__root)
 
     def __postorder(self, node):
-        keys = []
+        values = []
         if node is not None:
-            keys = self.__postorder(node.left)
-            keys = keys + self.__postorder(node.right)
-            keys.append(node.key)
-        return keys
+            values = self.__postorder(node.left)
+            values = values + self.__postorder(node.right)
+            values.append(node.value)
+        return values
 
 
 
